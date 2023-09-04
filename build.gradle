@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'org.slf4j:slf4j-api:2.0.5'
+    implementation 'org.slf4j:slf4j-simple:2.0.5'
+
+    // Cucumber
+    implementation 'io.cucumber:cucumber-java:7.13.0'
+    testImplementation 'io.cucumber:cucumber-junit:7.13.0'
+
+    // Selenium
+    implementation 'org.seleniumhq.selenium:selenium-java:4.10.0'
+
+    // TestNG
+    testImplementation 'org.testng:testng:7.8.0'
+
+    // Appium
+    implementation 'io.appium:java-client:8.5.1'
+
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+
+    // JUnit
+    testImplementation 'junit:junit:4.13.2'
+
+}
+
+test {
+//    useJUnitPlatform()
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+    filter {
+        includeTestsMatching "*.NotepadRunner"                   //Set to your Cucumber Runner directory/Package
+    }
+    systemProperties System.getProperties()
+}
